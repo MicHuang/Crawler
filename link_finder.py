@@ -7,7 +7,7 @@ class LinkFinder(HTMLParser):
         super().__init__()
         self.base_url = base_url
         self.page_url = page_url
-        self.links = set
+        self.links = set()
 
     def handle_starttag(self, tag, attrs):
         if tag == "a":
