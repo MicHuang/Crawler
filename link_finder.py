@@ -16,7 +16,7 @@ class LinkFinder(HTMLParser):
                     url = parse.urljoin(self.base_url, value)
                     self.links.add(url)
 
-    def page_link():
+    def page_links():
         return self.links
 
     def error(self, message):
