@@ -20,7 +20,7 @@ class Spider():
         Spider.base_url = base_url
         Spider.domain_name = domain_name
         Spider.queue_file = Spider.website_name + "/queue.txt"
-        Spider.crawled_file = Spider.website_name + "crawled.txt"
+        Spider.crawled_file = Spider.website_name + "/crawled.txt"
         self.boot()
         self.crawl_page("First Spider", Spider.base_url)
 
@@ -43,14 +43,14 @@ class Spider():
             Spider.update_files()
 
     @staticmethod
-    def gether_links(page_url):
+    def gather_links(page_url):
         html_string = ""
         try:
             response = urlopen(page_url)
             if response.getheader("Content-Type") == "text/html":
                 html_bytes = response.read()
                 html_string = html_bytes.decode("utf-8")
-            finder = LinkFinder(Spider.base_url=, page_url)
+            finder = LinkFinder(Spider.base_url, page_url)
             finder.feed(html_string)
         except:
             print("No, it's not gonna work...")
@@ -62,14 +62,13 @@ class Spider():
         for url in links:
             if url in Spider.queue:
                 continue
-            elif url in Spider.crawled:
+            if url in Spider.crawled:
                 continue
-            elif Spider.domain_name not in url:
+            if Spider.domain_name not in url:
                 continue
-            else:
-                Spider.queue.add(url)
+            Spider.queue.add(url)
 
     @staticmethod
     def update_files():
         set_to_file(Spider.queue, Spider.queue_file)
-        set_to_file(Spider.crawled, Spider.crawled.file)
+        set_to_file(Spider.crawled, Spider.crawled_file)
