@@ -27,8 +27,8 @@ def write_file(path, data):
 
 # add data on to the existing file
 def append_file(path, data):
-    with open(path, mode="a") as f:
-        f.write("\n" + data)
+    with open(path, "a") as f:
+        f.write(data + "\n")
 
 
 # delete the file
@@ -48,6 +48,6 @@ def file_to_set(file):
 
 #iterate through a set, each set item will be a line in the file
 def set_to_file(links, file):
-    delete_file_contents(file)
-    for link in sorted(links):
-        append_file(file, link)
+    with open(file, "w") as f:
+        for link in sorted(links):
+            f.write(link + "\n")
